@@ -6,11 +6,6 @@ if [[ "${INPUT_DOWNLOAD_ARTIFACTS}" == "true" ]]; then
   KEEP_CLONE=true
 fi
 
-if [[ "$DLMC_CI_ENDPOINT" == */ ]]
-then
-    DLMC_CI_ENDPOINT="${DLMC_CI_ENDPOINT%/}"
-fi
-
 JSON_DATA=$(jq -n -c \
   --arg owner "$INPUT_OWNER" \
   --arg repo "$INPUT_REPO" \
