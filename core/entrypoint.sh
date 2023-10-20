@@ -6,6 +6,11 @@ if [[ "${INPUT_DOWNLOAD_ARTIFACTS}" == "true" ]]; then
   KEEP_CLONE=true
 fi
 
+if [[ "$DLMC_CI_ENDPOINT" == */ ]]
+then
+    DLMC_CI_ENDPOINT="${DLMC_CI_ENDPOINT%/}"
+fi
+
 JSON_DATA=$(jq -n -c \
   --arg owner "$INPUT_OWNER" \
   --arg repo "$INPUT_REPO" \
@@ -36,7 +41,7 @@ echo $JSON_DATA > migration_data.json
 
 cat migration_data.json
 
-response_code=$(curl -vvv --location --request POST "${DLMC_CI_ENDPOINT}migration/run" \
+response_code=$(curl -vvv --location --request POST "${DLMC_CI_ENDPOINT}/migration/run" \
 --header "Verification-Token: ${DLMC_VERIFICATION_TOKEN}" \
 --header 'Content-Type: application/json' \
 --output response.json \
