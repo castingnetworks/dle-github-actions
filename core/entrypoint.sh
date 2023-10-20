@@ -39,9 +39,7 @@ touch migration_data.json
 
 echo $JSON_DATA > migration_data.json
 
-cat migration_data.json
-
-response_code=$(curl -vvv --location --request POST "${DLMC_CI_ENDPOINT}/migration/run" \
+response_code=$(curl --show-error --silent --location --request POST "${DLMC_CI_ENDPOINT}/migration/run" --write-out "%{http_code}" \
 --header "Verification-Token: ${DLMC_VERIFICATION_TOKEN}" \
 --header 'Content-Type: application/json' \
 --output response.json \
