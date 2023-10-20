@@ -58,6 +58,10 @@ fi
 mkdir artifacts
 
 download_artifacts() {
+    echo 'curl --show-error --silent "${DLMC_CI_ENDPOINT}/artifact/download?artifact_type=$1&session_id=$2&clone_id=$3" --write-out "%{http_code}" \
+         --header "Verification-Token: ${DLMC_VERIFICATION_TOKEN}" \
+         --header 'Content-Type: application/json' \
+         --output artifacts/$1'
     artifact_code=$(curl --show-error --silent "${DLMC_CI_ENDPOINT}/artifact/download?artifact_type=$1&session_id=$2&clone_id=$3" --write-out "%{http_code}" \
          --header "Verification-Token: ${DLMC_VERIFICATION_TOKEN}" \
          --header 'Content-Type: application/json' \
