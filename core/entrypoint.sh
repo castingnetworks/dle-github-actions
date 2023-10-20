@@ -81,6 +81,7 @@ done
 
 # Download report
 download_artifacts 'report.md' $session_id $clone_id
+cp response.json artifacts/response.json
 
 # Stop the running clone
 response_code=$(curl --show-error --silent "${DLMC_CI_ENDPOINT}/artifact/stop?clone_id=${clone_id}" --write-out "%{http_code}" \

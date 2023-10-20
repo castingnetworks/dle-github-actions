@@ -56,4 +56,4 @@ runs:
       uses: peter-evans/create-or-update-comment@v2.1.0
       with:
         issue-number: ${{ github.event.pull_request.number }}
-        body-file: 'artifacts/report.md'
+        body-file: 'artifacts/response.json'
