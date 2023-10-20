@@ -30,18 +30,17 @@ JSON_DATA=$(jq -n -c \
 
 echo $JSON_DATA
 
-temp_file=$(mktemp migration.json)
+touch migration_data.json
 
-echo $temp_file
-echo $JSON_DATA > $temp_file
+echo $JSON_DATA > migration_data.json
 
-cat $temp_file
+cat migration_data.json
 
 response_code=$(curl --show-error --silent --location --request POST "${DLMC_CI_ENDPOINT}/migration/run" --write-out "%{http_code}" \
 --header "Verification-Token: ${DLMC_VERIFICATION_TOKEN}" \
 --header 'Content-Type: application/json' \
 --output response.json \
---data '@migration.json')
+--data '@migration_data.json')
 
 jq . response.json
 
